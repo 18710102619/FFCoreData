@@ -20,6 +20,10 @@
 		3696FAA01D434FE1006DD4C3 /* Employee+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3696FA981D434FE1006DD4C3 /* Employee+CoreDataProperties.m */; };
 		3696FAA11D434FE1006DD4C3 /* Employee.m in Sources */ = {isa = PBXBuildFile; fileRef = 3696FA9A1D434FE1006DD4C3 /* Employee.m */; };
 		3696FAA21D434FE1006DD4C3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3696FA9C1D434FE1006DD4C3 /* ViewController.m */; };
+		3696FAA81D436258006DD4C3 /* Weibo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3696FAA61D436258006DD4C3 /* Weibo.xcdatamodeld */; };
+		3696FAAD1D436337006DD4C3 /* Status+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3696FAAA1D436337006DD4C3 /* Status+CoreDataProperties.m */; };
+		3696FAAE1D436337006DD4C3 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 3696FAAC1D436337006DD4C3 /* Status.m */; };
+		3696FAB11D43675C006DD4C3 /* FFDBContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 3696FAB01D43675C006DD4C3 /* FFDBContext.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,13 @@
 		3696FA9A1D434FE1006DD4C3 /* Employee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Employee.m; sourceTree = "<group>"; };
 		3696FA9B1D434FE1006DD4C3 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3696FA9C1D434FE1006DD4C3 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3696FAA71D436258006DD4C3 /* Weibo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Weibo.xcdatamodel; sourceTree = "<group>"; };
+		3696FAA91D436337006DD4C3 /* Status+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Status+CoreDataProperties.h"; sourceTree = "<group>"; };
+		3696FAAA1D436337006DD4C3 /* Status+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Status+CoreDataProperties.m"; sourceTree = "<group>"; };
+		3696FAAB1D436337006DD4C3 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
+		3696FAAC1D436337006DD4C3 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
+		3696FAAF1D43675C006DD4C3 /* FFDBContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDBContext.h; sourceTree = "<group>"; };
+		3696FAB01D43675C006DD4C3 /* FFDBContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDBContext.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +186,13 @@
 				3696FA981D434FE1006DD4C3 /* Employee+CoreDataProperties.m */,
 				3696FA991D434FE1006DD4C3 /* Employee.h */,
 				3696FA9A1D434FE1006DD4C3 /* Employee.m */,
+				3696FAA61D436258006DD4C3 /* Weibo.xcdatamodeld */,
+				3696FAA91D436337006DD4C3 /* Status+CoreDataProperties.h */,
+				3696FAAA1D436337006DD4C3 /* Status+CoreDataProperties.m */,
+				3696FAAB1D436337006DD4C3 /* Status.h */,
+				3696FAAC1D436337006DD4C3 /* Status.m */,
+				3696FAAF1D43675C006DD4C3 /* FFDBContext.h */,
+				3696FAB01D43675C006DD4C3 /* FFDBContext.m */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -311,6 +329,10 @@
 			files = (
 				3696FA9F1D434FE1006DD4C3 /* Department.m in Sources */,
 				365042751D411AF000C6664D /* AppDelegate.m in Sources */,
+				3696FAAE1D436337006DD4C3 /* Status.m in Sources */,
+				3696FAB11D43675C006DD4C3 /* FFDBContext.m in Sources */,
+				3696FAA81D436258006DD4C3 /* Weibo.xcdatamodeld in Sources */,
+				3696FAAD1D436337006DD4C3 /* Status+CoreDataProperties.m in Sources */,
 				3696FAA21D434FE1006DD4C3 /* ViewController.m in Sources */,
 				3696FA9E1D434FE1006DD4C3 /* Department+CoreDataProperties.m in Sources */,
 				3696FAA01D434FE1006DD4C3 /* Employee+CoreDataProperties.m in Sources */,
@@ -572,6 +594,16 @@
 			);
 			currentVersion = 3696FA921D434FE1006DD4C3 /* Company.xcdatamodel */;
 			path = Company.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		3696FAA61D436258006DD4C3 /* Weibo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3696FAA71D436258006DD4C3 /* Weibo.xcdatamodel */,
+			);
+			currentVersion = 3696FAA71D436258006DD4C3 /* Weibo.xcdatamodel */;
+			path = Weibo.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

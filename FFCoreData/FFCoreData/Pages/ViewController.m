@@ -7,41 +7,26 @@
 //
 
 #import "ViewController.h"
+#import "FFDBContext.h"
 #import "Employee.h"
 #import "Department.h"
 
 @interface ViewController ()
 
-@property(nonatomic,strong)NSManagedObjectContext *dbContext;
+@property(nonatomic,strong)NSManagedObjectContext *companyDBContext;
+@property(nonatomic,strong)NSManagedObjectContext *weiboDBContext;
 
 @end
 
 @implementation ViewController
 
-/*
- * 关联的时候，如果本地没有数据库文件，Ｃoreadata自己会创建
- */
-- (NSManagedObjectContext *)dbContext
+- (void)viewDidLoad
 {
-    //    1.创建模型文件 ［相当于一个数据库里的表］
-    //    2.添加实体 ［一张表］
-    //    3.创建实体类 [相当模型]
-    //    4.生成上下文 关联模型文件生成数据库
+    [super viewDidLoad];
     
-    if (_dbContext==nil) {
-        _dbContext = [[NSManagedObjectContext alloc] init];
-
-        NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
-
-        NSPersistentStoreCoordinator *store = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:model];
-        
-        NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"company.sqlite"];
-
-        [store addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:[NSURL fileURLWithPath:path] options:nil error:nil];
-        
-        _dbContext.persistentStoreCoordinator = store;
-    }
-    return _dbContext;
+    FFDBContext *dbContext=[FFDBContext sharedDBContext];
+    self.companyDBContext=dbContext.companyDBContext;
+    self.weiboDBContext=dbContext.weiboDBContext;
 }
 
 #pragma mark - 基本操作
@@ -50,43 +35,43 @@
 {
     NSError *error;
     
-    Department *ios = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.dbContext];
+    Department *ios = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.companyDBContext];
     ios.name = @"ios";
     ios.departNo = @"0001";
     ios.createDate = [NSDate date];
     error = nil;
-    [self.dbContext save:&error];
+    [self.companyDBContext save:&error];
     if (error) {
         NSLog(@"添加部门失败：%@",error);
     }
-    Department *android = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.dbContext];
+    Department *android = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:self.companyDBContext];
     android.name = @"android";
     android.departNo = @"0002";
     android.createDate = [NSDate date];
     error = nil;
-    [self.dbContext save:&error];
+    [self.companyDBContext save:&error];
     if (error) {
         NSLog(@"添加部门失败：%@",error);
     }
     
     for (int i=0; i<50; i++) {
-        Employee *emp1 = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:self.dbContext];
+        Employee *emp1 = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:self.companyDBContext];
         emp1.name = [NSString stringWithFormat:@"苹果_%i", i];
         emp1.height = @1.75;
         emp1.birthday = [NSDate date];
         emp1.depart=ios;
         error = nil;
-        [self.dbContext save:&error];
+        [self.companyDBContext save:&error];
         if (error) {
             NSLog(@"添加员工失败：%@",error);
         }
-        Employee *emp2 = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:self.dbContext];
+        Employee *emp2 = [NSEntityDescription insertNewObjectForEntityForName:@"Employee" inManagedObjectContext:self.companyDBContext];
         emp2.name = [NSString stringWithFormat:@"安卓_%i", i];
         emp2.height = @1.82;
         emp2.birthday = [NSDate date];
         emp2.depart=android;
         error = nil;
-        [self.dbContext save:&error];
+        [self.companyDBContext save:&error];
         if (error) {
             NSLog(@"添加员工失败：%@",error);
         }
@@ -108,7 +93,7 @@ static int _fetchLimit=10;   //一页的条数
     request.sortDescriptors = @[sort];
     
     NSError *error = nil;
-    NSArray *results = [self.dbContext executeFetchRequest:request error:&error];
+    NSArray *results = [self.companyDBContext executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"读取员工失败：%@",error);
     }
@@ -125,7 +110,7 @@ static int _fetchLimit=10;   //一页的条数
     request.fetchOffset=_fetchOffset+_fetchLimit*_currPage++;
     
     NSError *error = nil;
-    NSArray *results = [self.dbContext executeFetchRequest:request error:&error];
+    NSArray *results = [self.companyDBContext executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"读取员工失败：%@",error);
     }
@@ -155,7 +140,7 @@ static int _fetchLimit=10;   //一页的条数
     request.sortDescriptors = @[sort];
     
     NSError *error = nil;
-    NSArray *results = [self.dbContext executeFetchRequest:request error:&error];
+    NSArray *results = [self.companyDBContext executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"读取员工失败：%@",error);
     }
@@ -172,7 +157,7 @@ static int _fetchLimit=10;   //一页的条数
     request.predicate = pred;
     
     NSError *error = nil;
-    NSArray *results = [self.dbContext executeFetchRequest:request error:&error];
+    NSArray *results = [self.companyDBContext executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"修改员工失败：%@",error);
     }
@@ -180,7 +165,7 @@ static int _fetchLimit=10;   //一页的条数
     for (Employee *emp in results) {
         emp.height = @1.82;
     }
-    [self.dbContext save:&error];
+    [self.companyDBContext save:&error];
     if (error) {
         NSLog(@"修改员工失败：%@",error);
     }
@@ -194,15 +179,15 @@ static int _fetchLimit=10;   //一页的条数
     request.predicate = pred;
     
     NSError *error = nil;
-    NSArray *results = [self.dbContext executeFetchRequest:request error:&error];
+    NSArray *results = [self.companyDBContext executeFetchRequest:request error:&error];
     if (error) {
         NSLog(@"删除员工失败：%@",error);
     }
     
     for (Employee *emp in results) {
-        [self.dbContext deleteObject:emp];
+        [self.companyDBContext deleteObject:emp];
     }
-    [self.dbContext save:&error];
+    [self.companyDBContext save:&error];
     if (error) {
         NSLog(@"删除员工失败：%@",error);
     }
