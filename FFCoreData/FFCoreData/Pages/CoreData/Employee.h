@@ -2,12 +2,14 @@
 //  Employee.h
 //  FFCoreData
 //
-//  Created by 张玲玉 on 16/7/21.
+//  Created by 张玲玉 on 16/7/23.
 //  Copyright © 2016年 张玲玉. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+
+@class Department;
 
 NS_ASSUME_NONNULL_BEGIN
 
